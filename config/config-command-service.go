@@ -3,11 +3,14 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/scylladb/termtables"
+	"github.com/tidwall/gjson"
 	"nacos-cli/config/constant"
 	"nacos-cli/config/model"
 	"nacos-cli/http"
 	"nacos-cli/logger"
 	"net/url"
+	"strings"
 )
 
 //GetCommand get命令处理逻辑
@@ -52,5 +55,38 @@ func DelCommand(namespaceId string, dataId string, group string, address string,
 		fmt.Println("success")
 	} else {
 		fmt.Println("fail")
+	}
+}
+
+// ListCommand list 命令处理逻辑
+func ListCommand(pageNo string, pageSize string, address string, port string) {
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&dataId=&group=&search=blur")
+	if resp == "" {
+		fmt.Println("fail")
+	} else {
+		items := gjson.Get(resp, "pageItems").String()
+		configItems := &[]model.ConfigItem{}
+		err := json.Unmarshal([]byte(items), configItems)
+		if err != nil {
+			logger.Logger{}.Info("json parse error,configItem:%s", configItems)
+		}
+		//创建表格
+		t := termtables.CreateTable()
+		t.AddHeaders("id", "dataId", "group", "content")
+		for _, item := range *configItems {
+			subStr := ""
+			if strings.Contains(item.Content, "\n") {
+				str := strings.Split(item.Content, "\n")
+				subStr = str[0] + "..."
+			} else {
+				subStr = item.Content
+			}
+			if len(subStr) > 80 {
+				subStr = item.Content[0:80] + "..."
+			}
+			t.AddRow(item.Id, item.DataId, item.Group, subStr)
+		}
+		fmt.Println(t.Render())
 	}
 }
