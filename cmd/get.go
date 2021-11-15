@@ -13,7 +13,7 @@ var getConfigCmd = &cobra.Command{
 	Short: "Get configuration information",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) < 3 {
-			return errors.New("Three parameters are required,[namespaceId] and [dataId] and [group]")
+			return errors.New("3 parameters are required,[namespaceId] [dataId] [group]")
 		}
 		if args[2] == "" {
 			args[2] = constant.DefaultGroup
