@@ -43,3 +43,14 @@ func AddCommand(namespaceId string, dataId string, group string, content string,
 		fmt.Println("fail")
 	}
 }
+
+// DelCommand del 命令处理逻辑
+func DelCommand(namespaceId string, dataId string, group string, address string, port string) {
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Delete(prefix + constant.ConfigUrl + "?tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
+	if resp != "" {
+		fmt.Println("success")
+	} else {
+		fmt.Println("fail")
+	}
+}
