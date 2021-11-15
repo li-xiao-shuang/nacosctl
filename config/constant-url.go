@@ -1,7 +1,7 @@
 package config
 
-var prefix = "http://127.0.0.1:8848"
+var prefix = "http://%s:%s"
 
-var base = prefix + "/nacos"
+var base = "/nacos"
 
-var getUrl = base + "/v1/cs/configs"
+var configUrl = base + "/v1/cs/configs"

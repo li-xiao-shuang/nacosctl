@@ -15,26 +15,14 @@ func Execute() error {
 	return RootCmd.Execute()
 }
 
-//func initConfig() {
-//	// 勿忘读取config文件，无论是从cfgFile还是从home文件
-//	if cfgFile != "" {
-//		viper.SetConfigName(cfgFile)
-//	} else {
-//		// 找到home文件
-//		home, err := homedir.Dir()
-//		if err != nil {
-//			fmt.Println(err)
-//			os.Exit(1)
-//		}
-//
-//		// 在home文件夹中搜索以“.cobra”为名称的config
-//		viper.AddConfigPath(home)
-//		viper.SetConfigName(".cobra")
-//	}
-//	// 读取符合的环境变量
-//	viper.AutomaticEnv()
-//
-//	if err := viper.ReadInConfig(); err != nil {
-//		fmt.Println("Can not read config:", viper.ConfigFileUsed())
-//	}
-//}
+func initConfig() {
+	//viper.SetConfigFile("./config.yaml") // 指定配置文件路径
+	//viper.SetConfigName("config")        // 配置文件名称(无扩展名)
+	//viper.SetConfigType("yaml")          // 如果配置文件的名称中没有扩展名，则需要配置此项
+	//
+	//var author string
+	//RootCmd.Flags()
+	//RootCmd.PersistentFlags().StringVar(&author, "author", "YOUR NAME", "Author name for copyright attribution")
+	//viper.BindPFlag("author", RootCmd.PersistentFlags().Lookup("author"))
+	//fmt.Println(author)
+}

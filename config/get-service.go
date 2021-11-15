@@ -8,8 +8,9 @@ import (
 	"nacos-cli/logger"
 )
 
-func GetCommand(dataId string, group string) {
-	resp := http.Get(getUrl + "?dataId=" + dataId + "&" + "group=" + group + "&show=all")
+func GetCommand(dataId string, group string, address string, port string) {
+	prefix = fmt.Sprintf(prefix, address, port)
+	resp := http.Get(prefix + configUrl + "?dataId=" + dataId + "&" + "group=" + group + "&show=all")
 	configItem := &model.ConfigItem{}
 	if resp != "" {
 		err := json.Unmarshal([]byte(resp), configItem)
