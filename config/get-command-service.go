@@ -9,9 +9,9 @@ import (
 	"nacos-cli/logger"
 )
 
-func GetCommand(dataId string, group string, address string, port string) {
+func GetCommand(namespaceId string, dataId string, group string, address string, port string) {
 	constant.Prefix = fmt.Sprintf(constant.Prefix, address, port)
-	resp := http.Get(constant.Prefix + constant.ConfigUrl + "?dataId=" + dataId + "&" + "group=" + group + "&show=all")
+	resp := http.Get(constant.Prefix + constant.ConfigUrl + "?tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group + "&show=all")
 	configItem := &model.ConfigItem{}
 	if resp != "" {
 		err := json.Unmarshal([]byte(resp), configItem)
@@ -25,5 +25,7 @@ func GetCommand(dataId string, group string, address string, port string) {
 		fmt.Println("md5: " + configItem.Md5)
 		fmt.Println("tenant: " + configItem.Tenant)
 		fmt.Println("type: " + configItem.Type)
+	} else {
+		fmt.Println("null")
 	}
 }
