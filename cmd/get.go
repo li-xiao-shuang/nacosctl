@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"errors"
-	"fmt"
 	"github.com/spf13/cobra"
 	"nacos-cli/config"
+	"strconv"
 )
 
 var getConfigCmd = &cobra.Command{
@@ -17,9 +17,18 @@ var getConfigCmd = &cobra.Command{
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(cmd.Flag("address").Value.String())
-		fmt.Println(cmd.Flag("port").Value.String())
-		config.GetCommand(args[0], args[1], cmd.Flag("address").Value.String(), cmd.Flag("port").Value.String())
+		viper := config.GetViper()
+		address := viper.Get("server.address").(string)
+		port := strconv.Itoa(viper.Get("server.port").(int))
+
+		// 如果命令指定了flag  就替换配置文件
+		if cmd.Flag("address").Value.String() != "127.0.0.1" {
+			address = cmd.Flag("address").Value.String()
+		}
+		if cmd.Flag("port").Value.String() != "8848" {
+			port = cmd.Flag("port").Value.String()
+		}
+		config.GetCommand(args[0], args[1], address, port)
 	},
 }
 
