@@ -23,13 +23,8 @@ func GetCommand(namespaceId string, dataId string, group string, address string,
 		if err != nil {
 			logger.Logger{}.Info("json parse error,configItem:%s", configItem)
 		}
-		fmt.Println("id: " + configItem.Id)
-		fmt.Println("dataId: " + configItem.DataId)
-		fmt.Println("group: " + configItem.Group)
-		fmt.Println("content: " + configItem.Content)
-		fmt.Println("md5: " + configItem.Md5)
-		fmt.Println("tenant: " + configItem.Tenant)
-		fmt.Println("type: " + configItem.Type)
+		jsonByte, _ := json.MarshalIndent(configItem, "", "    ")
+		fmt.Println(string(jsonByte))
 	} else {
 		fmt.Println("null")
 	}
@@ -88,5 +83,19 @@ func ListCommand(pageNo string, pageSize string, address string, port string) {
 			t.AddRow(item.Id, item.DataId, item.Group, subStr)
 		}
 		fmt.Println(t.Render())
+	}
+}
+
+// VersionCommand version 命令处理逻辑
+func VersionCommand(id string, namespaceId string, dataId string, group string, address string, port string) {
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Get(prefix + constant.VersionUrl + "?id=" + id + "&tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
+	if resp != "" {
+		configitem := &model.ConfigItem{}
+		json.Unmarshal([]byte(resp), configitem)
+		jsonByte, _ := json.MarshalIndent(configitem, "", "    ")
+		fmt.Println(string(jsonByte))
+	} else {
+		fmt.Println("null")
 	}
 }
