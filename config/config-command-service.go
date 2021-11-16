@@ -91,9 +91,9 @@ func VersionCommand(id string, namespaceId string, dataId string, group string, 
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.VersionUrl + "?id=" + id + "&tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
 	if resp != "" {
-		configitem := &model.ConfigItem{}
-		json.Unmarshal([]byte(resp), configitem)
-		jsonByte, _ := json.MarshalIndent(configitem, "", "    ")
+		configItem := &model.ConfigItem{}
+		json.Unmarshal([]byte(resp), configItem)
+		jsonByte, _ := json.MarshalIndent(configItem, "", "    ")
 		fmt.Println(string(jsonByte))
 	} else {
 		fmt.Println("null")
