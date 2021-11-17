@@ -6,9 +6,9 @@ import (
 	"github.com/scylladb/termtables"
 	"github.com/tidwall/gjson"
 	"nacos-cli/common/http"
+	"nacos-cli/common/logger"
 	"nacos-cli/config/constant"
 	"nacos-cli/config/model"
-	"nacos-cli/logger"
 	"net/url"
 	"strings"
 )
