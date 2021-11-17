@@ -1,8 +1,8 @@
 package config
 
 import (
-	"fmt"
 	"github.com/spf13/viper"
+	"nacos-cli/config/constant"
 )
 
 // viperConfig 全局配置变量
@@ -15,9 +15,12 @@ func Init() error {
 	viper.AddConfigPath(".")             // 还可以在工作目录中查找配置
 	err := viper.ReadInConfig()          // 查找并读取配置文件
 	if err != nil {                      // 处理读取配置文件的错误
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		viperConfig = viper.New()
+		viperConfig.SetDefault("server.address", constant.DefaultAddress)
+		viperConfig.SetDefault("server.port", 8848)
+	} else {
+		viperConfig = viper.GetViper()
 	}
-	viperConfig = viper.GetViper()
 	return nil
 }
 
