@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"github.com/spf13/cobra"
+	"nacos-cli/common"
 	"nacos-cli/config"
 	"nacos-cli/config/constant"
 	"strconv"
@@ -18,7 +19,7 @@ var listConfigCmd = &cobra.Command{
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		viper := config.GetViper()
+		viper := common.GetViper()
 		address := viper.Get("server.address").(string)
 		port := strconv.Itoa(viper.Get("server.port").(int))
 
