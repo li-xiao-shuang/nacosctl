@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/scylladb/termtables"
+	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
+	"nacos-cli/common"
 	"nacos-cli/common/http"
 	"nacos-cli/common/logger"
 	"nacos-cli/config/constant"
@@ -14,7 +16,8 @@ import (
 )
 
 //GetCommand get命令处理逻辑
-func GetCommand(namespaceId string, dataId string, group string, address string, port string) {
+func GetCommand(namespaceId string, dataId string, group string, cmd *cobra.Command) {
+	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.ConfigUrl + "?tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group + "&show=all")
 	configItem := &model.ConfigItem{}
@@ -31,7 +34,8 @@ func GetCommand(namespaceId string, dataId string, group string, address string,
 }
 
 // AddCommand add 命令处理逻辑
-func AddCommand(namespaceId string, dataId string, group string, content string, typeStr string, address string, port string) {
+func AddCommand(namespaceId string, dataId string, group string, content string, typeStr string, cmd *cobra.Command) {
+	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	payload := url.Values{"namespaceId": {namespaceId}, "dataId": {dataId}, "group": {group}, "content": {content}, "type": {typeStr}}
 	resp := http.Post(prefix+constant.ConfigUrl, payload)
@@ -43,7 +47,8 @@ func AddCommand(namespaceId string, dataId string, group string, content string,
 }
 
 // DelCommand del 命令处理逻辑
-func DelCommand(namespaceId string, dataId string, group string, address string, port string) {
+func DelCommand(namespaceId string, dataId string, group string, cmd *cobra.Command) {
+	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Delete(prefix + constant.ConfigUrl + "?tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
 	if resp != "" {
@@ -54,7 +59,8 @@ func DelCommand(namespaceId string, dataId string, group string, address string,
 }
 
 // ListCommand list 命令处理逻辑
-func ListCommand(pageNo string, pageSize string, address string, port string) {
+func ListCommand(pageNo string, pageSize string, cmd *cobra.Command) {
+	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&dataId=&group=&search=blur")
 	if resp == "" {
@@ -87,7 +93,8 @@ func ListCommand(pageNo string, pageSize string, address string, port string) {
 }
 
 // VersionCommand version 命令处理逻辑
-func VersionCommand(id string, namespaceId string, dataId string, group string, address string, port string) {
+func VersionCommand(id string, namespaceId string, dataId string, group string, cmd *cobra.Command) {
+	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.VersionUrl + "?id=" + id + "&tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
 	if resp != "" {

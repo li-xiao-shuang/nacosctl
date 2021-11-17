@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	loader.Init()
+	loader.ConfigInit()
 	if err := cmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)

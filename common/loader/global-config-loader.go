@@ -8,7 +8,7 @@ import (
 // viperConfig 全局配置变量
 var viperConfig *viper.Viper
 
-func Init() error {
+func ConfigInit() error {
 	viper.SetConfigFile("./config.yaml") // 指定配置文件路径
 	viper.SetConfigName("config")        // 配置文件名称(无扩展名)
 	viper.SetConfigType("yaml")          // 如果配置文件的名称中没有扩展名，则需要配置此项
