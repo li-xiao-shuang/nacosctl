@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/scylladb/termtables"
 	"github.com/spf13/cobra"
+	"github.com/tidwall/gjson"
 	"nacos-cli/common"
 	"nacos-cli/common/http"
 	"nacos-cli/config/constant"
@@ -19,8 +20,9 @@ func ListCommand(cmd *cobra.Command) {
 	if resp == "" {
 		fmt.Println("null")
 	}
+	items := gjson.Get(resp, "data").String()
 	namespaces := &[]model.NamespaceInfo{}
-	json.Unmarshal([]byte(resp), namespaces)
+	json.Unmarshal([]byte(items), namespaces)
 	t := termtables.CreateTable()
 	t.AddHeaders("namespace", "showName", "quota", "configCount")
 	for _, namespace := range *namespaces {
