@@ -36,7 +36,7 @@ func ListCommand(cmd *cobra.Command) {
 func AddCommand(cmd *cobra.Command, namespaceId string, namespaceName string, namespaceDesc string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
-	payload := url.Values{"namespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
+	payload := url.Values{"customNamespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
 	resp := http.Post(prefix+constant.NamespaceUrl, payload)
 	if resp != "" {
 		fmt.Println("success")
