@@ -10,9 +10,10 @@ import (
 	"nacos-cli/common/http"
 	"nacos-cli/config/constant"
 	"nacos-cli/namespace/model"
+	"net/url"
 )
 
-// list 命令处理逻辑
+// ListCommand list 命令处理逻辑
 func ListCommand(cmd *cobra.Command) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
@@ -29,4 +30,17 @@ func ListCommand(cmd *cobra.Command) {
 		t.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
 	}
 	fmt.Println(t.Render())
+}
+
+// AddCommand add命令处理逻辑
+func AddCommand(cmd *cobra.Command, namespaceId string, namespaceName string, namespaceDesc string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	payload := url.Values{"namespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
+	resp := http.Post(prefix+constant.NamespaceUrl, payload)
+	if resp != "" {
+		fmt.Println("success")
+		return
+	}
+	fmt.Println("fail")
 }

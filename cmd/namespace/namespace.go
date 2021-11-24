@@ -11,7 +11,7 @@ var NamespaceCmd = &cobra.Command{
 
 func init() {
 	NamespaceCmd.AddCommand(listNamespaceCmd)
-	//NamespaceCmd.AddCommand(addConfigCmd)
+	NamespaceCmd.AddCommand(addNamespaceCmd)
 	//NamespaceCmd.AddCommand(deleteConfigCmd)
 	//NamespaceCmd.AddCommand(listConfigCmd)
 	//NamespaceCmd.AddCommand(versionConfigCmd)
