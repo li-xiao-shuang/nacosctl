@@ -44,3 +44,15 @@ func AddCommand(cmd *cobra.Command, namespaceId string, namespaceName string, na
 	}
 	fmt.Println("fail")
 }
+
+// DelCommand del命令处理逻辑
+func DelCommand(cmd *cobra.Command, namespaceId string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Delete(prefix + constant.NamespaceUrl + "?namespaceId=" + namespaceId)
+	if resp != "" {
+		fmt.Println("success")
+		return
+	}
+	fmt.Println("fail")
+}
