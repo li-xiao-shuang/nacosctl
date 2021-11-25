@@ -13,6 +13,6 @@ func init() {
 	NamespaceCmd.AddCommand(listNamespaceCmd)
 	NamespaceCmd.AddCommand(addNamespaceCmd)
 	NamespaceCmd.AddCommand(delNamespace)
-	//NamespaceCmd.AddCommand(listConfigCmd)
+	NamespaceCmd.AddCommand(updateNamespaceCmd)
 	//NamespaceCmd.AddCommand(versionConfigCmd)
 }

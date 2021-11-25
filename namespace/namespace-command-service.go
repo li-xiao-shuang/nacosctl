@@ -56,3 +56,15 @@ func DelCommand(cmd *cobra.Command, namespaceId string) {
 	}
 	fmt.Println("fail")
 }
+
+// UpdateCommand update命令处理逻辑
+func UpdateCommand(cmd *cobra.Command, namespaceId string, namespaceName string, namespaceDesc string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Put(prefix + constant.NamespaceUrl + "?namespace=" + namespaceId + "&namespaceShowName=" + namespaceName + "&namespaceDesc=" + namespaceDesc)
+	if resp != "" {
+		fmt.Println("success")
+		return
+	}
+	fmt.Println("fail")
+}

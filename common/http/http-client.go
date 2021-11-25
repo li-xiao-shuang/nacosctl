@@ -60,3 +60,22 @@ func Delete(url string) string {
 	}
 	return ""
 }
+
+func Put(url string) string {
+	req, _ := http.NewRequest("PUT", url, nil)
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		logger.Logger{}.Info("put request error,error:%s", err)
+		return ""
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		logger.Logger{}.Info("reads an error,error:%s ", err)
+		return ""
+	}
+	if resp.StatusCode == 200 {
+		return string(body)
+	}
+	return ""
+}
