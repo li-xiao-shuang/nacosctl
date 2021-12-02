@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"nacos-cli/cmd/config"
+	"nacos-cli/cmd/instance"
 	"nacos-cli/cmd/namespace"
 )
 
@@ -19,4 +20,5 @@ func Execute() error {
 func init() {
 	rootCmd.AddCommand(config.ConfigCmd)
 	rootCmd.AddCommand(namespace.NamespaceCmd)
+	rootCmd.AddCommand(instance.InstanceCmd)
 }

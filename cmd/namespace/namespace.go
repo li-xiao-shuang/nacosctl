@@ -14,5 +14,4 @@ func init() {
 	NamespaceCmd.AddCommand(addNamespaceCmd)
 	NamespaceCmd.AddCommand(delNamespace)
 	NamespaceCmd.AddCommand(updateNamespaceCmd)
-	//NamespaceCmd.AddCommand(versionConfigCmd)
 }
