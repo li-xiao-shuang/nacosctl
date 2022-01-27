@@ -7,7 +7,7 @@ import (
 	"nacos-cli/namespace"
 )
 
-var addNamespaceCmd = &cobra.Command{
+var createNamespaceCmd = &cobra.Command{
 	Use:   "add [namespaceId] [namespaceName] [namespaceDesc]",
 	Short: "Add a namespace",
 	Args: func(cmd *cobra.Command, args []string) error {
@@ -25,6 +25,6 @@ var addNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	addNamespaceCmd.Flags().StringP("address", "b", constant.DefaultAddress, "nacos server ip address")
-	addNamespaceCmd.Flags().StringP("port", "p", constant.DefaultPort, "nacos server port")
+	createNamespaceCmd.Flags().StringP("address", "b", constant.DefaultAddress, "nacos server ip address")
+	createNamespaceCmd.Flags().StringP("port", "p", constant.DefaultPort, "nacos server port")
 }

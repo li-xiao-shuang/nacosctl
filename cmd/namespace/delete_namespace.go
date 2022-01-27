@@ -7,7 +7,7 @@ import (
 	"nacos-cli/namespace"
 )
 
-var delNamespace = &cobra.Command{
+var deleteNamespace = &cobra.Command{
 	Use:   "del [namespaceId]",
 	Short: "Delete a namespace",
 	Args: func(cmd *cobra.Command, args []string) error {
@@ -25,6 +25,6 @@ var delNamespace = &cobra.Command{
 }
 
 func init() {
-	delNamespace.Flags().StringP("address", "b", constant.DefaultAddress, "nacos server ip address")
-	delNamespace.Flags().StringP("port", "p", constant.DefaultPort, "nacos server port")
+	deleteNamespace.Flags().StringP("address", "b", constant.DefaultAddress, "nacos server ip address")
+	deleteNamespace.Flags().StringP("port", "p", constant.DefaultPort, "nacos server port")
 }

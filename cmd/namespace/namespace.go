@@ -5,13 +5,13 @@ import (
 )
 
 var NamespaceCmd = &cobra.Command{
-	Use:   "[get] namespace",
+	Use:   "namespace",
 	Short: "Namespace related operations",
 }
 
 func init() {
-	NamespaceCmd.AddCommand(listNamespaceCmd)
-	NamespaceCmd.AddCommand(addNamespaceCmd)
-	NamespaceCmd.AddCommand(delNamespace)
+	NamespaceCmd.AddCommand(createNamespaceCmd)
 	NamespaceCmd.AddCommand(updateNamespaceCmd)
+	NamespaceCmd.AddCommand(deleteNamespace)
+	NamespaceCmd.AddCommand(listNamespaceCmd)
 }

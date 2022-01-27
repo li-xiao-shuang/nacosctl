@@ -9,7 +9,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "nacosctl",
 	Short: "Nacos command line tool",
-	Long:  `A fast and flexible command line tool, Created by the nacos community.`,
+	Long:  "A fast and flexible command line tool, Created by the nacos community.",
 }
 
 func Execute() error {
@@ -17,9 +17,8 @@ func Execute() error {
 }
 
 func init() {
-	//namespace.AddNamespaceCmd(rootCmd)
+	rootCmd.AddCommand(namespace.NamespaceCmd)
 	//rootCmd.AddCommand(command.CreateCmd)
 	rootCmd.AddCommand(config.ConfigCmd)
-	rootCmd.AddCommand(namespace.NamespaceCmd)
 	//rootCmd.AddCommand(instance.InstanceCmd)
 }
