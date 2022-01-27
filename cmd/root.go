@@ -2,15 +2,12 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/cmd/config"
-	"nacos-cli/cmd/instance"
-	"nacos-cli/cmd/namespace"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "nacos-cli",
+	Use:   "nacosctl",
 	Short: "Nacos command line tool",
-	Long:  `A fast and flexible command line tool .Created by the nacos community。`,
+	Long:  `A fast and flexible command line tool, Created by the nacos community.`,
 }
 
 func Execute() error {
@@ -18,7 +15,7 @@ func Execute() error {
 }
 
 func init() {
-	rootCmd.AddCommand(config.ConfigCmd)
-	rootCmd.AddCommand(namespace.NamespaceCmd)
-	rootCmd.AddCommand(instance.InstanceCmd)
+	//rootCmd.AddCommand(config.ConfigCmd)
+	//rootCmd.AddCommand(namespace.NamespaceCmd)
+	//rootCmd.AddCommand(instance.InstanceCmd)
 }
