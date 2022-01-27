@@ -8,7 +8,7 @@ import (
 )
 
 var deleteNamespace = &cobra.Command{
-	Use:   "del [namespaceId]",
+	Use:   "delete [namespaceId]",
 	Short: "Delete a namespace",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {

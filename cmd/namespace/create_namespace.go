@@ -1,30 +1,30 @@
 package namespace
 
 import (
-	"errors"
 	"github.com/spf13/cobra"
-	"nacos-cli/config/constant"
 	"nacos-cli/namespace"
 )
 
+var (
+	namespaceId   = ""
+	namespaceName = ""
+	namespaceDesc = ""
+)
+
 var createNamespaceCmd = &cobra.Command{
-	Use:   "add [namespaceId] [namespaceName] [namespaceDesc]",
-	Short: "Add a namespace",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) < 3 {
-			return errors.New("3 parameters are required,[namespaceId] [namespaceName] [namespaceDesc]")
-		}
-		if args[0] == "" {
-			return errors.New("[namespaceId] can not be blank")
-		}
-		return nil
-	},
+	Use:     "create",
+	Short:   "Create a namespace, If namespaceid is not specified, it will be automatically generated",
+	Long:    "Create a namespace, If namespaceid is not specified, it will be automatically generated",
+	Example: " nacosctl namespace create --namespaceId= --namespaceName=test --namespaceDesc=test",
+
 	Run: func(cmd *cobra.Command, args []string) {
-		namespace.AddCommand(cmd, args[0], args[1], args[2])
+		namespace.AddCommand(cmd, namespaceId, namespaceName, namespaceDesc)
 	},
 }
 
 func init() {
-	createNamespaceCmd.Flags().StringP("address", "b", constant.DefaultAddress, "nacos server ip address")
-	createNamespaceCmd.Flags().StringP("port", "p", constant.DefaultPort, "nacos server port")
+	createNamespaceCmd.Flags().StringVarP(&namespaceId, "namespaceId", "i", "", "namespace id")
+	createNamespaceCmd.Flags().StringVarP(&namespaceName, "namespaceName", "n", "", "namespace name")
+	createNamespaceCmd.Flags().StringVarP(&namespaceDesc, "namespaceDesc", "d", "", "namespace desc")
+
 }

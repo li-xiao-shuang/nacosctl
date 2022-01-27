@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/cmd/config"
 	"nacos-cli/cmd/namespace"
+	"nacos-cli/config/constant"
 )
 
 var rootCmd = &cobra.Command{
@@ -17,8 +17,10 @@ func Execute() error {
 }
 
 func init() {
+	rootCmd.PersistentFlags().StringP("address", "a", constant.DefaultAddress, "nacos server ip address")
+	rootCmd.PersistentFlags().StringP("port", "p", constant.DefaultPort, "nacos server port")
 	rootCmd.AddCommand(namespace.NamespaceCmd)
 	//rootCmd.AddCommand(command.CreateCmd)
-	rootCmd.AddCommand(config.ConfigCmd)
+	//rootCmd.AddCommand(config.ConfigCmd)
 	//rootCmd.AddCommand(instance.InstanceCmd)
 }

@@ -5,8 +5,9 @@ import (
 )
 
 var NamespaceCmd = &cobra.Command{
-	Use:   "namespace",
-	Short: "Namespace related operations",
+	Use:       "namespace",
+	Short:     "Namespace related operations",
+	ValidArgs: make([]string, 1),
 }
 
 func init() {
