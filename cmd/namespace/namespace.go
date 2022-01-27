@@ -5,7 +5,7 @@ import (
 )
 
 var NamespaceCmd = &cobra.Command{
-	Use:   "namespace",
+	Use:   "[get] namespace",
 	Short: "Namespace related operations",
 }
 

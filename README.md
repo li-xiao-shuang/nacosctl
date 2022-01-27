@@ -55,7 +55,7 @@ server:
 
 ```bash
 Usage:
-  nacos-cli config [command]
+  nacosctl config [command]
 
 Available Commands:
   add         Add a configuration
@@ -74,7 +74,7 @@ Flags:
 
 ```bash
 Usage:
-  nacos-cli config add [namespaceId] [dataId] [group] [content] [type] [flags]
+  nacosctl config add [namespaceId] [dataId] [group] [content] [type] [flags]
 
 Flags:
   -b, --address string   nacos server ip address (default "127.0.0.1")
@@ -84,7 +84,7 @@ Flags:
 
 ```bash
 例子 ：
-nacos-cli config add '' test-dataId '' 添加一个文本内容 '' -b 127.0.0.1 -p 8848
+nacosctl config add '' test-dataId '' 添加一个文本内容 '' -b 127.0.0.1 -p 8848
 
 输出：
 success
@@ -100,7 +100,7 @@ success
 
 ```bash
 Usage:
-  nacos-cli config get [namespaceId] [dataId] [group] [flags]
+  nacosctl config get [namespaceId] [dataId] [group] [flags]
 
 Flags:
   -b, --address string   nacos server ip address (default "127.0.0.1")
@@ -110,7 +110,7 @@ Flags:
 
 ```bash
 例子：
-nacos-cli config get '' test-dataId ''
+nacosctl config get '' test-dataId ''
 
 输出：
 {
@@ -130,7 +130,7 @@ nacos-cli config get '' test-dataId ''
 
 ```bash
 Usage:
-  nacos-cli config del [namespaceId] [dataId] [group] [flags]
+  nacosctl config del [namespaceId] [dataId] [group] [flags]
 
 Flags:
   -b, --address string   nacos server ip address (default "127.0.0.1")
@@ -140,7 +140,7 @@ Flags:
 
 ```bash
 例子：
-nacos-cli config del '' test-1 ''
+nacosctl config del '' test-1 ''
 
 输出：
 success
@@ -152,7 +152,7 @@ success
 
 ```bash
 Usage:
-  nacos-cli config list [pageNo] [pageSize] [flags]
+  nacosctl config list [pageNo] [pageSize] [flags]
 
 Flags:
   -b, --address string   nacos server ip address (default "127.0.0.1")
@@ -162,7 +162,7 @@ Flags:
 
 ```bash
 例子：
-nacos-cli config list 1 10
+nacosctl config list 1 10
 
 输出：
 +--------------------+------------------+---------------+------------------------------------------------------------------+
@@ -187,7 +187,7 @@ nacos-cli config list 1 10
 
 ```bash
 Usage:
-  nacos-cli config version [id] [namespaceId] [dataId] [group] [flags]
+  nacosctl config version [id] [namespaceId] [dataId] [group] [flags]
 
 Flags:
   -b, --address string   nacos server ip address (default "127.0.0.1")
@@ -197,7 +197,7 @@ Flags:
 
 ```bash
 例子：
-nacos-cli config version 434307109421600768 '' test-6666 ''
+nacosctl config version 434307109421600768 '' test-6666 ''
 
 输出：
 {

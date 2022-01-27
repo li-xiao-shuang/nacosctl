@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"nacos-cli/cmd/config"
+	"nacos-cli/cmd/namespace"
 )
 
 var rootCmd = &cobra.Command{
@@ -15,7 +17,9 @@ func Execute() error {
 }
 
 func init() {
-	//rootCmd.AddCommand(config.ConfigCmd)
-	//rootCmd.AddCommand(namespace.NamespaceCmd)
+	//namespace.AddNamespaceCmd(rootCmd)
+	//rootCmd.AddCommand(command.CreateCmd)
+	rootCmd.AddCommand(config.ConfigCmd)
+	rootCmd.AddCommand(namespace.NamespaceCmd)
 	//rootCmd.AddCommand(instance.InstanceCmd)
 }
