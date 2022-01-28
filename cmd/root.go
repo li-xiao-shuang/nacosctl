@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/cmd/basecmd"
-	"nacos-cli/config/constant"
+	"nacosctl/cmd/basecmd"
+	"nacosctl/config/constant"
 )
 
 var rootCmd = &cobra.Command{

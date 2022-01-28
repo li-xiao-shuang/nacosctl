@@ -2,8 +2,8 @@ package common
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/common/loader"
-	"nacos-cli/config/constant"
+	"nacosctl/common/loader"
+	"nacosctl/config/constant"
 	"strconv"
 )
 

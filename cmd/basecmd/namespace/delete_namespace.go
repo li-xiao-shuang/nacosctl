@@ -3,7 +3,7 @@ package namespace
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"nacos-cli/process/namespace"
+	"nacosctl/process/namespace"
 )
 
 var DeleteNamespaceCmd = &cobra.Command{

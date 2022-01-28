@@ -2,7 +2,7 @@ package namespace
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/process/namespace"
+	"nacosctl/process/namespace"
 )
 
 var ListNamespaceCmd = &cobra.Command{

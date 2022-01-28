@@ -2,7 +2,7 @@
 
 
 目录:
-- [nacos-cli]()
+- [nacosctl]()
 - [构建安装]()
   - [源码安装]()
   - [二进制安装]()
@@ -14,7 +14,7 @@
     - [list]()
     - [version]()
 
-# nacos-cli
+# nacosctl
 
 **Nacos** 命令行工具，基于 **Nacos OpenApi** 封装的命令行工具。提供一些对配置、服务注册与发现、命名空间的简单操作 。借助 **go** 语言的跨平台交叉编译，将编译好的二进制文件直接放到指定系统下就可以直接运行， 无需环境部署。
 
@@ -25,18 +25,18 @@
 从 **github** 将源码 **clone** 到本地, 编译源码适用于想自定义命令时候，可以拿到源码二次开发后重新构建。这种方式就需要使用 **go** 环境了。
 
 ```bash
-git clone https://github.com/is-gypsophila/nacos-cli.git
+git clone https://github.com/is-gypsophila/nacosctl.git
 ```
 
-使用  **go build -o nacos-cli** 编译项目，**-o** 执行指定输出文件为 **nacos-cli** 。
+使用  **go build -o nacosctl** 编译项目，**-o** 执行指定输出文件为 **nacosctl** 。
 
 到这里是不是有点熟悉，是不是想起 **reids-cli** ？没错就是模仿 **redis-cli** 起的名字，希望能够像 **reids-cli** 一样好用。
 
-将编译好的 **nacos-cli** 可执行二进制文件放到 **/usr/local/bin** 的目录下，就可以使用了。
+将编译好的 **nacosctl** 可执行二进制文件放到 **/usr/local/bin** 的目录下，就可以使用了。
 
 ## 二进制安装
 
-直接下载编译好的二进制文件 **nacos-cli** ，然后将它放到 **/usr/local/bin** 目录下。原理同上。
+直接下载编译好的二进制文件 **nacosctl** ，然后将它放到 **/usr/local/bin** 目录下。原理同上。
 
 > 由于执行命令需要用到 Nacos 的服务 address、port 两个参数，这里有两种指定方式。第一种是通过命令的 Flag 指定，第二种是在 $HOME 的目录下创建 config.yaml , 在 yaml 文件中指定 address、port。例如：
 >
@@ -51,7 +51,7 @@ server:
 
 ## config 命令
 
-可以通过 **nacos-cli config -h** 查看命令怎么使用
+可以通过 **nacosctl config -h** 查看命令怎么使用
 
 ```bash
 Usage:

@@ -6,10 +6,10 @@ import (
 	"github.com/scylladb/termtables"
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
-	"nacos-cli/common"
-	"nacos-cli/common/http"
-	"nacos-cli/config/constant"
-	"nacos-cli/process/model"
+	"nacosctl/common"
+	"nacosctl/common/http"
+	"nacosctl/config/constant"
+	"nacosctl/process/model"
 	"net/url"
 )
 

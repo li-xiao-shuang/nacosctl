@@ -2,7 +2,7 @@ package basecmd
 
 import (
 	"github.com/spf13/cobra"
-	"nacos-cli/cmd/basecmd/namespace"
+	"nacosctl/cmd/basecmd/namespace"
 )
 
 var UpdateCmd = &cobra.Command{

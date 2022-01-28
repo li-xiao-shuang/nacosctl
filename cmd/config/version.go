@@ -3,8 +3,8 @@ package config
 import (
 	"errors"
 	"github.com/spf13/cobra"
-	"nacos-cli/config"
-	"nacos-cli/config/constant"
+	"nacosctl/config"
+	"nacosctl/config/constant"
 )
 
 var versionConfigCmd = &cobra.Command{

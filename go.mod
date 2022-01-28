@@ -1,4 +1,4 @@
-module nacos-cli
+module nacosctl
 
 go 1.17
 

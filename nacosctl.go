@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"nacos-cli/cmd"
-	"nacos-cli/common/loader"
+	"nacosctl/cmd"
+	"nacosctl/common/loader"
 	"os"
 )
 

@@ -2,7 +2,7 @@ package http
 
 import (
 	"io/ioutil"
-	"nacos-cli/common/logger"
+	"nacosctl/common/logger"
 	"net/http"
 )
 
