@@ -6,19 +6,19 @@ import (
 	"nacosctl/process/namespace"
 )
 
-var getNamespaceCmd = &cobra.Command{
+var GetNamespaceCmd = &cobra.Command{
 	Use:     "namespace [namespaceId]",
-	Short:   "delete the specified namespace",
-	Long:    "delete the specified namespace",
-	Example: "nacosctl delete namespace [namespaceId]",
+	Short:   "Get the specified namespace information",
+	Long:    "Get the specified namespace information",
+	Example: "nacosctl get namespace [namespaceId]",
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		namespaceId := args[0]
 		if namespaceId == "" {
 			fmt.Println("[error]:namespaceId must not be null")
-			fmt.Println("[see]:nacosctl delete namespace -h")
+			fmt.Println("[see]:nacosctl get namespace -h")
 			return
 		}
-		namespace.ParseDeleteNamespaceCmd(cmd, namespaceId)
+		namespace.ParseGetNamespaceCmd(cmd, namespaceId)
 	},
 }

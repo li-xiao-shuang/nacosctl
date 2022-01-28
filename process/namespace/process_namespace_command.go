@@ -68,3 +68,18 @@ func ParseGetNamespaceListCmd(cmd *cobra.Command) {
 	}
 	fmt.Println(t.Render())
 }
+
+func ParseGetNamespaceCmd(cmd *cobra.Command, namespaceId string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Get(prefix + constant.NamespaceUrl + "?show=all&namespaceId=" + namespaceId)
+	if resp == "" {
+		fmt.Println("null")
+	}
+	namespace := model.NewNamespaceInfo()
+	json.Unmarshal([]byte(resp), namespace)
+	t := termtables.CreateTable()
+	t.AddHeaders("命名空间ID", "命名空间名称", "配置额度", "使用数量")
+	t.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
+	fmt.Println(t.Render())
+}

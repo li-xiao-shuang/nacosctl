@@ -10,7 +10,7 @@ var UpdateNamespaceCmd = &cobra.Command{
 	Use:     "namespace [namespaceName] [namespaceDesc] [namespaceId] ",
 	Short:   "Update the name and description of the specified namespace",
 	Long:    "Update the name and description of the specified namespace",
-	Example: "nacosctl update namespace [namespaceId] [namespaceName] [namespaceDesc]",
+	Example: "nacosctl update namespace [namespaceName] [namespaceDesc] [namespaceId]",
 	Args:    cobra.MinimumNArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		namespaceName := args[0]

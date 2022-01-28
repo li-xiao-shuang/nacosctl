@@ -12,6 +12,8 @@ var GetCmd = &cobra.Command{
 	Example: "nacosctl update [resource]",
 }
 
-func init()  {
-	GetCmd.AddCommand(namespace.ListNamespaceCmd)
+func init() {
+	GetCmd.AddCommand(namespace.GetNamespaceListCmd)
+	GetCmd.AddCommand(namespace.GetNamespaceCmd)
+
 }

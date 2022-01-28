@@ -5,10 +5,10 @@ import (
 	"nacosctl/process/namespace"
 )
 
-var ListNamespaceCmd = &cobra.Command{
+var GetNamespaceListCmd = &cobra.Command{
 	Use:     "namespaces",
 	Short:   "Returns all namespace information",
-	Long:    "Returns all namespace informatione",
+	Long:    "Returns all namespace information",
 	Example: "nacosctl get namespaces",
 	Args:    cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
