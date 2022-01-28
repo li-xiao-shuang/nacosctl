@@ -10,7 +10,7 @@ var (
 	namespaceId   = ""
 	namespaceName = ""
 	namespaceDesc = ""
-	example       = "nacosctl namespace create --namespaceId= --namespaceName=test --namespaceDesc=test"
+	example       = "nacosctl namespace create [--namespaceId=] --namespaceName=test --namespaceDesc=test"
 )
 
 var createNamespaceCmd = &cobra.Command{
