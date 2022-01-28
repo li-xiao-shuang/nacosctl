@@ -27,7 +27,4 @@ func init() {
 	rootCmd.AddCommand(basecmd.UpdateCmd)
 	rootCmd.AddCommand(basecmd.GetCmd)
 
-	//rootCmd.AddCommand(command.CreateCmd)
-	//rootCmd.AddCommand(config.ConfigCmd)
-	//rootCmd.AddCommand(instance.InstanceCmd)
 }
