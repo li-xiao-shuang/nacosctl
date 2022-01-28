@@ -2,6 +2,7 @@ package basecmd
 
 import (
 	"github.com/spf13/cobra"
+	"nacosctl/cmd/basecmd/config"
 	"nacosctl/cmd/basecmd/namespace"
 )
 
@@ -14,4 +15,5 @@ var DeleteCmd = &cobra.Command{
 
 func init() {
 	DeleteCmd.AddCommand(namespace.DeleteNamespaceCmd)
+	DeleteCmd.AddCommand(config.DeleteConfigCmd)
 }
