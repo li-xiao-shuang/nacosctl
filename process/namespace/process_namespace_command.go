@@ -32,3 +32,14 @@ func ParseDeleteNamespaceCmd(cmd *cobra.Command, namespaceId string) {
 	}
 	fmt.Println("fail")
 }
+
+func ParseUpdateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespaceDesc string, namespaceId string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Put(prefix + constant.NamespaceUrl + "?namespace=" + namespaceId + "&namespaceShowName=" + namespaceName + "&namespaceDesc=" + namespaceDesc)
+	if resp != "" {
+		fmt.Println("success")
+		return
+	}
+	fmt.Println("fail")
+}

@@ -13,7 +13,7 @@ var DeleteNamespaceCmd = &cobra.Command{
 	Example: "nacosctl delete namespace [namespaceId]",
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		namespaceId = args[0]
+		namespaceId := args[0]
 		if namespaceId == "" {
 			fmt.Println("[error]:namespaceId must not be null")
 			fmt.Println("[see]:nacosctl delete namespace -h")
