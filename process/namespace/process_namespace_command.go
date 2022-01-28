@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/logrusorgru/aurora"
-	"github.com/scylladb/termtables"
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
 	"nacosctl/common"
 	"nacosctl/common/http"
+	"nacosctl/printer"
 	"nacosctl/process/constant"
 	"nacosctl/process/model"
 	"net/url"
@@ -21,10 +21,10 @@ func ParseCreateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespace
 	payload := url.Values{"customNamespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
 	resp := http.Post(prefix+constant.NamespaceUrl, payload)
 	if resp != "" {
-		fmt.Println(aurora.Cyan("done"))
+		printer.Cyan("done")
 		return
 	}
-	fmt.Println("fail")
+	printer.Red("fail")
 }
 
 // ParseDeleteNamespaceCmd 解析删除命名空间命令
@@ -33,10 +33,10 @@ func ParseDeleteNamespaceCmd(cmd *cobra.Command, namespaceId string) {
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Delete(prefix + constant.NamespaceUrl + "?namespaceId=" + namespaceId)
 	if resp != "" {
-		fmt.Println("success")
+		printer.Cyan("done")
 		return
 	}
-	fmt.Println("fail")
+	printer.Red("fail")
 }
 
 // ParseUpdateNamespaceCmd 解析更新命名空间命令
@@ -45,10 +45,10 @@ func ParseUpdateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespace
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Put(prefix + constant.NamespaceUrl + "?namespace=" + namespaceId + "&namespaceShowName=" + namespaceName + "&namespaceDesc=" + namespaceDesc)
 	if resp != "" {
-		fmt.Println("success")
+		printer.Cyan("done")
 		return
 	}
-	fmt.Println("fail")
+	printer.Red("fail")
 }
 
 // ParseGetNamespaceListCmd 解析查询命名空间列表命令
@@ -56,31 +56,36 @@ func ParseGetNamespaceListCmd(cmd *cobra.Command) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.NamespaceUrl)
+	table := printer.NewTable(100)
+	table.AddRow(aurora.Magenta("命名空间ID"), aurora.Magenta("命名空间名称"), aurora.Magenta("配置额度"), aurora.Magenta("使用数量"))
 	if resp == "" {
-		fmt.Println("null")
+		fmt.Println(table)
+		return
 	}
 	items := gjson.Get(resp, "data").String()
 	namespaces := &[]model.NamespaceInfo{}
 	json.Unmarshal([]byte(items), namespaces)
-	t := termtables.CreateTable()
-	t.AddHeaders("命名空间ID", "命名空间名称", "配置额度", "使用数量")
 	for _, namespace := range *namespaces {
-		t.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
+		table.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
 	}
-	fmt.Println(t.Render())
+	fmt.Println(table)
 }
 
+// ParseGetNamespaceCmd 解析查询命名空间命令
 func ParseGetNamespaceCmd(cmd *cobra.Command, namespaceId string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.NamespaceUrl + "?show=all&namespaceId=" + namespaceId)
+
+	table := printer.NewTable(100)
+	table.AddRow(aurora.Magenta("命名空间ID"), aurora.Magenta("命名空间名称"), aurora.Magenta("配置额度"), aurora.Magenta("使用数量"))
+
 	if resp == "" {
-		fmt.Println("null")
+		fmt.Println(table)
+		return
 	}
 	namespace := model.NewNamespaceInfo()
 	json.Unmarshal([]byte(resp), namespace)
-	t := termtables.CreateTable()
-	t.AddHeaders("命名空间ID", "命名空间名称", "配置额度", "使用数量")
-	t.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
-	fmt.Println(t.Render())
+	table.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
+	fmt.Println(table)
 }

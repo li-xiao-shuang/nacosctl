@@ -1,8 +1,8 @@
 package namespace
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/namespace"
 )
 
@@ -15,8 +15,8 @@ var GetNamespaceCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		namespaceId := args[0]
 		if namespaceId == "" {
-			fmt.Println("[error]:namespaceId must not be null")
-			fmt.Println("[see]:nacosctl get namespace -h")
+			printer.Red("[error]:namespaceId must not be null")
+			printer.Yellow("[see]:nacosctl get namespace -h")
 			return
 		}
 		namespace.ParseGetNamespaceCmd(cmd, namespaceId)

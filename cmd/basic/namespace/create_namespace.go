@@ -1,8 +1,8 @@
 package namespace
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/namespace"
 )
 
@@ -17,19 +17,15 @@ var CreateNamespaceCmd = &cobra.Command{
 		namespaceName := args[0]
 		namespaceDesc := args[1]
 		if namespaceName == "" {
-			fmt.Println("[error]:namespaceName must not be null")
-			fmt.Println("[see]:nacosctl create namespace -h")
+			printer.Red("[error]:namespaceName must not be null")
+			printer.Yellow("[see]:nacosctl create namespace -h")
 			return
 		}
 		if namespaceDesc == "" {
-			fmt.Println("[error]:namespaceDesc must not be null")
-			fmt.Println("[see]:nacosctl create namespace -h")
+			printer.Red("[error]:namespaceDesc must not be null")
+			printer.Yellow("[see]:nacosctl create namespace -h")
 			return
 		}
 		namespace.ParseCreateNamespaceCmd(cmd, namespaceName, namespaceDesc, namespaceId)
 	},
-}
-
-func init() {
-
 }

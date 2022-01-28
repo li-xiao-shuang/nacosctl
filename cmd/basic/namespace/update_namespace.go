@@ -1,8 +1,8 @@
 package namespace
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/namespace"
 )
 
@@ -17,18 +17,18 @@ var UpdateNamespaceCmd = &cobra.Command{
 		namespaceDesc := args[1]
 		namespaceId := args[2]
 		if namespaceName == "" {
-			fmt.Println("[error]:namespaceName must not be null")
-			fmt.Println("[see]:nacosctl update namespace -h")
+			printer.Red("[error]:namespaceName must not be null")
+			printer.Yellow("[see]:nacosctl update namespace -h")
 			return
 		}
 		if namespaceDesc == "" {
-			fmt.Println("[error]:namespaceDesc must not be null")
-			fmt.Println("[see]:nacosctl update namespace -h")
+			printer.Red("[error]:namespaceDesc must not be null")
+			printer.Yellow("[see]:nacosctl update namespace -h")
 			return
 		}
 		if namespaceId == "" {
-			fmt.Println("[error]:namespaceId must not be null")
-			fmt.Println("[see]:nacosctl update namespace -h")
+			printer.Red("[error]:namespaceId must not be null")
+			printer.Yellow("[see]:nacosctl update namespace -h")
 			return
 		}
 		namespace.ParseUpdateNamespaceCmd(cmd, namespaceName, namespaceDesc, namespaceId)
