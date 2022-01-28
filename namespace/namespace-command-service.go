@@ -33,7 +33,7 @@ func ListCommand(cmd *cobra.Command) {
 }
 
 // AddCommand add命令处理逻辑
-func AddCommand(cmd *cobra.Command, namespaceId string, namespaceName string, namespaceDesc string) {
+func AddCommand(cmd *cobra.Command, namespaceName string, namespaceDesc string, namespaceId string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	payload := url.Values{"customNamespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}

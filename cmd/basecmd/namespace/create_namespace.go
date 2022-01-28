@@ -3,21 +3,20 @@ package namespace
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"nacos-cli/namespace"
+	"nacos-cli/process/namespace"
 )
 
 var (
 	namespaceId   = ""
 	namespaceName = ""
 	namespaceDesc = ""
-	example       = "nacosctl create namespace [namespaceName] [namespaceDesc] [namespaceId] "
 )
 
 var CreateNamespaceCmd = &cobra.Command{
 	Use:     "namespace [namespaceName] [namespaceDesc] [namespaceId]",
-	Short:   "Create a namespace, If namespaceid is not specified, it will be automatically generated",
-	Long:    "Create a namespace, If namespaceid is not specified, it will be automatically generated",
-	Example: example,
+	Short:   "Create a namespace, If namespaceId is not specified, it will be automatically generated",
+	Long:    "Create a namespace, If namespaceId is not specified, it will be automatically generated",
+	Example: "nacosctl create namespace [namespaceName] [namespaceDesc] [namespaceId] ",
 	Args:    cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		namespaceName = args[0]
@@ -32,7 +31,7 @@ var CreateNamespaceCmd = &cobra.Command{
 			fmt.Println("[see]:nacosctl create namespace -h")
 			return
 		}
-		namespace.AddCommand(cmd, namespaceId, namespaceName, namespaceDesc)
+		namespace.ParseCreateNamespaceCmd(cmd, namespaceName, namespaceDesc, namespaceId)
 	},
 }
 
