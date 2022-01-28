@@ -3,6 +3,7 @@ module nacosctl
 go 1.17
 
 require (
+	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/scylladb/termtables v0.0.0-20191203121021-c4c0b6d42ff4
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0

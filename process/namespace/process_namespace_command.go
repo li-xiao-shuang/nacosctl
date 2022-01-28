@@ -3,6 +3,7 @@ package namespace
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/logrusorgru/aurora"
 	"github.com/scylladb/termtables"
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
@@ -20,7 +21,7 @@ func ParseCreateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespace
 	payload := url.Values{"customNamespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
 	resp := http.Post(prefix+constant.NamespaceUrl, payload)
 	if resp != "" {
-		fmt.Println("success")
+		fmt.Println(aurora.Cyan("done"))
 		return
 	}
 	fmt.Println("fail")
