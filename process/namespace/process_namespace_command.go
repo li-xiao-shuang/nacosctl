@@ -9,7 +9,7 @@ import (
 	"nacos-cli/common"
 	"nacos-cli/common/http"
 	"nacos-cli/config/constant"
-	"nacos-cli/namespace/model"
+	"nacos-cli/process/model"
 	"net/url"
 )
 
