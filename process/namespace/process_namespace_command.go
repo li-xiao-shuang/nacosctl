@@ -8,7 +8,7 @@ import (
 	"github.com/tidwall/gjson"
 	"nacosctl/common"
 	"nacosctl/common/http"
-	"nacosctl/config/constant"
+	"nacosctl/process/constant"
 	"nacosctl/process/model"
 	"net/url"
 )

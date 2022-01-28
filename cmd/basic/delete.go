@@ -1,9 +1,9 @@
-package basecmd
+package basic
 
 import (
 	"github.com/spf13/cobra"
-	"nacosctl/cmd/basecmd/config"
-	"nacosctl/cmd/basecmd/namespace"
+	"nacosctl/cmd/basic/config"
+	"nacosctl/cmd/basic/namespace"
 )
 
 var DeleteCmd = &cobra.Command{

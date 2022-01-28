@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/spf13/cobra"
 	"nacosctl/config"
-	"nacosctl/config/constant"
+	"nacosctl/process/constant"
 )
 
 var versionConfigCmd = &cobra.Command{

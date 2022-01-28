@@ -3,8 +3,8 @@ package config
 import (
 	"errors"
 	"github.com/spf13/cobra"
-	"nacosctl/config/constant"
 	"nacosctl/process/config"
+	"nacosctl/process/constant"
 )
 
 var CreateConfigCmd = &cobra.Command{

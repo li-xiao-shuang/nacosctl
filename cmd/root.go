@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"nacosctl/cmd/basecmd"
-	"nacosctl/config/constant"
+	"nacosctl/cmd/basic"
+	"nacosctl/process/constant"
 )
 
 var rootCmd = &cobra.Command{
@@ -22,9 +22,9 @@ func init() {
 	rootCmd.PersistentFlags().StringP("port", "p", constant.DefaultPort, "nacos server port")
 
 	// base command
-	rootCmd.AddCommand(basecmd.CreateCmd)
-	rootCmd.AddCommand(basecmd.DeleteCmd)
-	rootCmd.AddCommand(basecmd.UpdateCmd)
-	rootCmd.AddCommand(basecmd.GetCmd)
+	rootCmd.AddCommand(basic.CreateCmd)
+	rootCmd.AddCommand(basic.DeleteCmd)
+	rootCmd.AddCommand(basic.UpdateCmd)
+	rootCmd.AddCommand(basic.GetCmd)
 
 }

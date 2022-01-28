@@ -2,7 +2,7 @@ package loader
 
 import (
 	"github.com/spf13/viper"
-	"nacosctl/config/constant"
+	"nacosctl/process/constant"
 )
 
 // viperConfig 全局配置变量

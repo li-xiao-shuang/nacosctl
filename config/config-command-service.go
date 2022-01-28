@@ -9,8 +9,8 @@ import (
 	"nacosctl/common"
 	"nacosctl/common/http"
 	"nacosctl/common/logger"
-	"nacosctl/config/constant"
-	"nacosctl/config/model"
+	"nacosctl/process/constant"
+	"nacosctl/process/model"
 	"net/url"
 	"strings"
 )
