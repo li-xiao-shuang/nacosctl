@@ -62,7 +62,7 @@ func ParseGetNamespaceListCmd(cmd *cobra.Command) {
 	namespaces := &[]model.NamespaceInfo{}
 	json.Unmarshal([]byte(items), namespaces)
 	t := termtables.CreateTable()
-	t.AddHeaders("namespace", "showName", "quota", "configCount")
+	t.AddHeaders("命名空间ID", "命名空间名称", "配置额度", "使用数量")
 	for _, namespace := range *namespaces {
 		t.AddRow(namespace.Namespace, namespace.NamespaceShowName, namespace.Quota, namespace.ConfigCount)
 	}
