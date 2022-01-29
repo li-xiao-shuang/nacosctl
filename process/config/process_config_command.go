@@ -78,7 +78,7 @@ func ParseGetConfigCmd(cmd *cobra.Command, dataId string, namespaceId string, gr
 func ParseGetConfigListCmd(cmd *cobra.Command, pageNo string, pageSize string, namespaceId string, group string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
-	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&tenant" + namespaceId + "&group=" + group + "&dataId=&search=blur")
+	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&tenant=" + namespaceId + "&group=" + group + "&dataId=&search=blur")
 	table := printer.NewTableWrap(100, false)
 	table.AddRow(aurora.Magenta("ID:"), aurora.Magenta("DataId:"), aurora.Magenta("命名空间:"),
 		aurora.Magenta("组名:"), aurora.Magenta("配置类型:"), aurora.Magenta("配置内容:"))
@@ -95,5 +95,38 @@ func ParseGetConfigListCmd(cmd *cobra.Command, pageNo string, pageSize string, n
 	for _, item := range *configItems {
 		table.AddRow(item.Id, item.DataId, item.Tenant, item.Group, item.Type, item.Content)
 	}
+	fmt.Println(table)
+}
+
+// ParseConfigVersionCmd 解析配置版本命令
+func ParseConfigVersionCmd(cmd *cobra.Command, id string, namespaceId string, dataId string, group string) {
+	address, port := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	resp := http.Get(prefix + constant.VersionUrl + "?id=" + id + "&tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group)
+
+	table := printer.NewTableWrap(300, true)
+	if resp == "" {
+		table.AddRow(aurora.Magenta("ID:"))
+		table.AddRow(aurora.Magenta("DataId:"))
+		table.AddRow(aurora.Magenta("命名空间:"))
+		table.AddRow(aurora.Magenta("组名:"))
+		table.AddRow(aurora.Magenta("MD5:"))
+		table.AddRow(aurora.Magenta("配置类型:"))
+		table.AddRow(aurora.Magenta("配置内容:"))
+		fmt.Println(table)
+		return
+	}
+	configItem := &model.ConfigItem{}
+	err := json.Unmarshal([]byte(resp), configItem)
+	if err != nil {
+		logger.Logger{}.Info("json parse error,configItem:%s", configItem)
+	}
+	table.AddRow(aurora.Magenta("ID:"), configItem.Id)
+	table.AddRow(aurora.Magenta("DataId:"), configItem.DataId)
+	table.AddRow(aurora.Magenta("命名空间:"), configItem.Tenant)
+	table.AddRow(aurora.Magenta("组名:"), configItem.Group)
+	table.AddRow(aurora.Magenta("MD5:"), configItem.Md5)
+	table.AddRow(aurora.Magenta("配置类型:"), configItem.Type)
+	table.AddRow(aurora.Magenta("配置内容:"), configItem.Content)
 	fmt.Println(table)
 }

@@ -2,6 +2,7 @@ package basic
 
 import (
 	"github.com/spf13/cobra"
+	"nacosctl/cmd/basic/config"
 	"nacosctl/cmd/basic/namespace"
 )
 
@@ -14,4 +15,5 @@ var UpdateCmd = &cobra.Command{
 
 func init() {
 	UpdateCmd.AddCommand(namespace.UpdateNamespaceCmd)
+	UpdateCmd.AddCommand(config.UpdateConfigCmd)
 }
