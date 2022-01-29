@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/config"
 	"nacosctl/process/constant"
 )
@@ -13,6 +14,11 @@ var DeleteConfigCmd = &cobra.Command{
 	Example: "nacosctl delete config [dataId]",
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		if args[0] == "" {
+			printer.Red("[error]:dataId must not be null")
+			printer.Yellow("[see]:nacosctl delete config -h")
+			return
+		}
 		config.ParseDeleteConfigCmd(cmd, args[0], configNamespaceId, group)
 	},
 }

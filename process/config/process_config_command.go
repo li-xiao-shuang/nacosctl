@@ -3,7 +3,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/scylladb/termtables"
+	"github.com/logrusorgru/aurora"
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
 	"nacosctl/common"
@@ -13,7 +13,6 @@ import (
 	"nacosctl/process/constant"
 	"nacosctl/process/model"
 	"net/url"
-	"strings"
 )
 
 // ParseCreateConfigCmd 解析创建配置命令
@@ -33,7 +32,7 @@ func ParseCreateConfigCmd(cmd *cobra.Command, namespaceId string, dataId string,
 func ParseDeleteConfigCmd(cmd *cobra.Command, dataId string, namespaceId string, group string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
-	fmt.Println("url",prefix + constant.ConfigUrl + "?dataId=" + dataId + "&group=" + group + "&tenant=" + namespaceId)
+	fmt.Println("url", prefix+constant.ConfigUrl+"?dataId="+dataId+"&group="+group+"&tenant="+namespaceId)
 	resp := http.Delete(prefix + constant.ConfigUrl + "?dataId=" + dataId + "&group=" + group + "&tenant=" + namespaceId)
 	if resp != "" {
 		printer.Cyan("done")
@@ -43,53 +42,58 @@ func ParseDeleteConfigCmd(cmd *cobra.Command, dataId string, namespaceId string,
 }
 
 // ParseGetConfigCmd 解析查询配置命令
-func ParseGetConfigCmd(namespaceId string, dataId string, group string, cmd *cobra.Command) {
+func ParseGetConfigCmd(cmd *cobra.Command, dataId string, namespaceId string, group string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
 	resp := http.Get(prefix + constant.ConfigUrl + "?tenant=" + namespaceId + "&dataId=" + dataId + "&group=" + group + "&show=all")
-	configItem := &model.ConfigItem{}
-	if resp != "" {
-		err := json.Unmarshal([]byte(resp), configItem)
-		if err != nil {
-			logger.Logger{}.Info("json parse error,configItem:%s", configItem)
-		}
-		jsonByte, _ := json.MarshalIndent(configItem, "", "    ")
-		fmt.Println(string(jsonByte))
-	} else {
-		fmt.Println("null")
+
+	table := printer.NewTableWrap(300, true)
+	if resp == "" {
+		table.AddRow(aurora.Magenta("ID:"))
+		table.AddRow(aurora.Magenta("DataId:"))
+		table.AddRow(aurora.Magenta("命名空间:"))
+		table.AddRow(aurora.Magenta("组名:"))
+		table.AddRow(aurora.Magenta("MD5:"))
+		table.AddRow(aurora.Magenta("配置类型:"))
+		table.AddRow(aurora.Magenta("配置内容:"))
+		fmt.Println(table)
+		return
 	}
+	configItem := &model.ConfigItem{}
+	err := json.Unmarshal([]byte(resp), configItem)
+	if err != nil {
+		logger.Logger{}.Info("json parse error,configItem:%s", configItem)
+	}
+	table.AddRow(aurora.Magenta("ID:"), configItem.Id)
+	table.AddRow(aurora.Magenta("DataId:"), configItem.DataId)
+	table.AddRow(aurora.Magenta("命名空间:"), configItem.Tenant)
+	table.AddRow(aurora.Magenta("组名:"), configItem.Group)
+	table.AddRow(aurora.Magenta("MD5:"), configItem.Md5)
+	table.AddRow(aurora.Magenta("配置类型:"), configItem.Type)
+	table.AddRow(aurora.Magenta("配置内容:"), configItem.Content)
+	fmt.Println(table)
 }
 
 // ParseGetConfigListCmd 解析查询配置列表命令
-func ParseGetConfigListCmd(pageNo string, pageSize string, cmd *cobra.Command) {
+func ParseGetConfigListCmd(cmd *cobra.Command, pageNo string, pageSize string, namespaceId string, group string) {
 	address, port := common.GetServerAddress(cmd)
 	prefix := fmt.Sprintf(constant.Prefix, address, port)
-	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&dataId=&group=&search=blur")
+	resp := http.Get(prefix + constant.ConfigUrl + "?pageNo=" + pageNo + "&pageSize=" + pageSize + "&tenant" + namespaceId + "&group=" + group + "&dataId=&search=blur")
+	table := printer.NewTableWrap(100, false)
+	table.AddRow(aurora.Magenta("ID:"), aurora.Magenta("DataId:"), aurora.Magenta("命名空间:"),
+		aurora.Magenta("组名:"), aurora.Magenta("配置类型:"), aurora.Magenta("配置内容:"))
 	if resp == "" {
-		fmt.Println("fail")
-	} else {
-		items := gjson.Get(resp, "pageItems").String()
-		configItems := &[]model.ConfigItem{}
-		err := json.Unmarshal([]byte(items), configItems)
-		if err != nil {
-			logger.Logger{}.Info("json parse error,configItem:%s", configItems)
-		}
-		//创建表格
-		t := termtables.CreateTable()
-		t.AddHeaders("id", "dataId", "group", "content")
-		for _, item := range *configItems {
-			subStr := ""
-			if strings.Contains(item.Content, "\n") {
-				str := strings.Split(item.Content, "\n")
-				subStr = str[0] + "..."
-			} else {
-				subStr = item.Content
-			}
-			if len(subStr) > 80 {
-				subStr = item.Content[0:80] + "..."
-			}
-			t.AddRow(item.Id, item.DataId, item.Group, subStr)
-		}
-		fmt.Println(t.Render())
+		fmt.Println(table)
+		return
 	}
+	items := gjson.Get(resp, "pageItems").String()
+	configItems := &[]model.ConfigItem{}
+	err := json.Unmarshal([]byte(items), configItems)
+	if err != nil {
+		logger.Logger{}.Info("json parse error,configItem:%s", configItems)
+	}
+	for _, item := range *configItems {
+		table.AddRow(item.Id, item.DataId, item.Tenant, item.Group, item.Type, item.Content)
+	}
+	fmt.Println(table)
 }

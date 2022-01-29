@@ -1,27 +1,29 @@
 package config
 
 import (
-	"errors"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/config"
 	"nacosctl/process/constant"
 )
 
 var GetConfigCmd = &cobra.Command{
-	Use:     "config [namespaceId] [dataId] [group]",
+	Use:     "config [dataId]",
 	Short:   "Get configuration information",
 	Long:    "Get configuration information",
-	Example: "nacosctl get config [namespaceId] [dataId] [group]",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) < 3 {
-			return errors.New("3 parameters are required,[namespaceId] [dataId] [group]")
-		}
-		if args[2] == "" {
-			args[2] = constant.DefaultGroup
-		}
-		return nil
-	},
+	Example: "nacosctl get config [dataId]",
+	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		config.ParseGetConfigCmd(args[0], args[1], args[2], cmd)
+		if args[0] == "" {
+			printer.Red("[error]:dataId must not be null")
+			printer.Yellow("[see]:nacosctl get config -h")
+			return
+		}
+		config.ParseGetConfigCmd(cmd, args[0], configNamespaceId, group)
 	},
+}
+
+func init() {
+	GetConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	GetConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 }

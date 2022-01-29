@@ -1,9 +1,10 @@
 package config
 
 import (
-	"errors"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/config"
+	"nacosctl/process/constant"
 )
 
 var GetConfigListCmd = &cobra.Command{
@@ -11,13 +12,23 @@ var GetConfigListCmd = &cobra.Command{
 	Short:   "Get a list of configuration information in paginated form",
 	Long:    "Get a list of configuration information in paginated form",
 	Example: "nacosctl get configs [pageNo] [pageSize]",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) < 2 {
-			return errors.New("2 parameters are required,[pageNo] [pageSize]")
-		}
-		return nil
-	},
+	Args:    cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		config.ParseGetConfigListCmd(args[0], args[1], cmd)
+		if args[0] == "" {
+			printer.Red("[error]:pageNo must not be null")
+			printer.Yellow("[see]:nacosctl get configs -h")
+			return
+		}
+		if args[1] == "" {
+			printer.Red("[error]:pageSize must not be null")
+			printer.Yellow("[see]:nacosctl get configs -h")
+			return
+		}
+		config.ParseGetConfigListCmd(cmd, args[0], args[1], configNamespaceId, group)
 	},
+}
+
+func init() {
+	GetConfigListCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	GetConfigListCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 }
