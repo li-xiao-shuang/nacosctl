@@ -6,14 +6,15 @@ import (
 	"nacosctl/process/namespace"
 )
 
+var defaultNamespaceId string
+
 var CreateNamespaceCmd = &cobra.Command{
-	Use:     "namespace [namespaceName] [namespaceDesc] [namespaceId]",
+	Use:     "namespace [namespaceName] [namespaceDesc]",
 	Short:   "Create a namespace, If namespaceId is not specified, it will be automatically generated",
 	Long:    "Create a namespace, If namespaceId is not specified, it will be automatically generated",
-	Example: "nacosctl create namespace [namespaceName] [namespaceDesc] [namespaceId] ",
+	Example: "nacosctl create namespace [namespaceName] [namespaceDesc] [flags]",
 	Args:    cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		namespaceId := ""
 		namespaceName := args[0]
 		namespaceDesc := args[1]
 		if namespaceName == "" {
@@ -26,6 +27,10 @@ var CreateNamespaceCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl create namespace -h")
 			return
 		}
-		namespace.ParseCreateNamespaceCmd(cmd, namespaceName, namespaceDesc, namespaceId)
+		namespace.ParseCreateNamespaceCmd(cmd, namespaceName, namespaceDesc, defaultNamespaceId)
 	},
+}
+
+func init() {
+	CreateNamespaceCmd.Flags().StringVarP(&defaultNamespaceId, "namespaceId", "i", "", "namespace id")
 }

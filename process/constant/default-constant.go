@@ -1,6 +1,8 @@
 package constant
 
-var DefaultAddress = "127.0.0.1"
-var DefaultPort = "8848"
-var DefaultGroup = "DEFAULT_GROUP"
-var DefaultType = "text"
+const (
+	DefaultAddress = "127.0.0.1"
+	DefaultPort    = "8848"
+	DefaultGroup   = "DEFAULT_GROUP"
+	DefaultType    = "text"
+)

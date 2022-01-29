@@ -1,27 +1,23 @@
 package config
 
 import (
-	"errors"
 	"github.com/spf13/cobra"
 	"nacosctl/process/config"
 	"nacosctl/process/constant"
 )
 
 var DeleteConfigCmd = &cobra.Command{
-	Use:     "config [namespaceId] [dataId] [group]",
+	Use:     "config [dataId]",
 	Short:   "Delete a configuration",
 	Long:    "Delete a configuration",
-	Example: "nacosctl delete config [namespaceId] [dataId] [group]",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) < 3 {
-			return errors.New("3 parameters are required,[namespaceId] [dataId] [group]")
-		}
-		if args[2] == "" {
-			args[2] = constant.DefaultGroup
-		}
-		return nil
-	},
+	Example: "nacosctl delete config [dataId]",
+	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		config.ParseDeleteConfigCmd(args[0], args[1], args[2], cmd)
+		config.ParseDeleteConfigCmd(cmd, args[0], configNamespaceId, group)
 	},
+}
+
+func init() {
+	DeleteConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	DeleteConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 }

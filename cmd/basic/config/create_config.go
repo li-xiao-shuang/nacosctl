@@ -1,30 +1,46 @@
 package config
 
 import (
-	"errors"
 	"github.com/spf13/cobra"
+	"nacosctl/printer"
 	"nacosctl/process/config"
 	"nacosctl/process/constant"
 )
 
+var (
+	configNamespaceId string
+	dataId            string
+	group             string
+	content           string
+	configType        string
+)
+
 var CreateConfigCmd = &cobra.Command{
-	Use:     "config [namespaceId] [dataId] [group] [content] [type]",
+	Use:     "config [dataId] [content]",
 	Short:   "Create a configuration",
 	Long:    "Create a configuration",
-	Example: "nacosctl create config [namespaceId] [dataId] [group] [content] [type]",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) < 5 {
-			return errors.New("5 parameters are required,[namespaceId] [dataId] [group] [content] [type]")
-		}
-		if args[2] == "" {
-			args[2] = constant.DefaultGroup
-		}
-		if args[4] == "" {
-			args[4] = constant.DefaultType
-		}
-		return nil
-	},
+	Example: "nacosctl create config [dataId] [content]",
+	Args:    cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		config.ParseCreateConfigCmd(args[0], args[1], args[2], args[3], args[4], cmd)
+		if args[0] == "" {
+			printer.Red("[error]:dataId must not be null")
+			printer.Yellow("[see]:nacosctl create config -h")
+			return
+		}
+		if args[1] == "" {
+			printer.Red("[error]:content must not be null")
+			printer.Yellow("[see]:nacosctl create config -h")
+			return
+		}
+		dataId = args[0]
+		content = args[1]
+		config.ParseCreateConfigCmd(cmd, configNamespaceId, dataId, group, content, configType)
 	},
+}
+
+func init() {
+	CreateConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	CreateConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
+	CreateConfigCmd.Flags().StringVarP(&configType, "type", "t", constant.DefaultType, "config type")
+
 }
