@@ -23,6 +23,7 @@ var GetConfigCmd = &cobra.Command{
 		}
 		if versionId != "" {
 			config.ParseConfigVersionCmd(cmd, versionId, configNamespaceId, args[0], group)
+			return
 		}
 		config.ParseGetConfigCmd(cmd, args[0], configNamespaceId, group)
 	},
