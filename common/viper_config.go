@@ -2,8 +2,8 @@ package common
 
 import (
 	"github.com/spf13/cobra"
+	"nacosctl/common/constant"
 	"nacosctl/common/loader"
-	"nacosctl/process/constant"
 )
 
 func GetServerAddress(cmd *cobra.Command) (address string) {

@@ -7,10 +7,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/tidwall/gjson"
 	"nacosctl/common"
+	"nacosctl/common/constant"
 	"nacosctl/common/http"
 	"nacosctl/common/logger"
 	"nacosctl/printer"
-	"nacosctl/process/constant"
 	"nacosctl/process/model"
 	"net/url"
 )

@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"nacosctl/cmd/basic"
-	"nacosctl/process/constant"
+	"nacosctl/common/constant"
 )
 
 var rootCmd = &cobra.Command{

@@ -2,9 +2,9 @@ package config
 
 import (
 	"github.com/spf13/cobra"
+	"nacosctl/common/constant"
 	"nacosctl/printer"
 	"nacosctl/process/config"
-	"nacosctl/process/constant"
 )
 
 var versionId string
