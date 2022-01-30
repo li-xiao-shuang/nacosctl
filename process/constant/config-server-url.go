@@ -1,7 +1,7 @@
 package constant
 
 const (
-	Prefix = "http://%s:%s"
+	Prefix = "http://%s"
 
 	base = "/nacos"
 

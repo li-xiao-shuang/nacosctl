@@ -16,8 +16,8 @@ import (
 
 // ParseCreateNamespaceCmd 解析创建命名空间命令
 func ParseCreateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespaceDesc string, namespaceId string) {
-	address, port := common.GetServerAddress(cmd)
-	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	address := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address)
 	payload := url.Values{"customNamespaceId": {namespaceId}, "namespaceName": {namespaceName}, "namespaceDesc": {namespaceDesc}}
 	resp := http.Post(prefix+constant.NamespaceUrl, payload)
 	if resp != "" {
@@ -29,8 +29,8 @@ func ParseCreateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespace
 
 // ParseDeleteNamespaceCmd 解析删除命名空间命令
 func ParseDeleteNamespaceCmd(cmd *cobra.Command, namespaceId string) {
-	address, port := common.GetServerAddress(cmd)
-	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	address := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address)
 	resp := http.Delete(prefix + constant.NamespaceUrl + "?namespaceId=" + namespaceId)
 	if resp != "" {
 		printer.Cyan("done")
@@ -41,8 +41,8 @@ func ParseDeleteNamespaceCmd(cmd *cobra.Command, namespaceId string) {
 
 // ParseUpdateNamespaceCmd 解析更新命名空间命令
 func ParseUpdateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespaceDesc string, namespaceId string) {
-	address, port := common.GetServerAddress(cmd)
-	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	address := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address)
 	resp := http.Put(prefix + constant.NamespaceUrl + "?namespace=" + namespaceId + "&namespaceShowName=" + namespaceName + "&namespaceDesc=" + namespaceDesc)
 	if resp != "" {
 		printer.Cyan("done")
@@ -53,8 +53,8 @@ func ParseUpdateNamespaceCmd(cmd *cobra.Command, namespaceName string, namespace
 
 // ParseGetNamespaceListCmd 解析查询命名空间列表命令
 func ParseGetNamespaceListCmd(cmd *cobra.Command) {
-	address, port := common.GetServerAddress(cmd)
-	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	address := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address)
 	resp := http.Get(prefix + constant.NamespaceUrl)
 	table := printer.NewTable(100)
 	table.AddRow(aurora.Magenta("命名空间ID"), aurora.Magenta("命名空间名称"), aurora.Magenta("配置额度"), aurora.Magenta("使用数量"))
@@ -73,8 +73,8 @@ func ParseGetNamespaceListCmd(cmd *cobra.Command) {
 
 // ParseGetNamespaceCmd 解析查询命名空间命令
 func ParseGetNamespaceCmd(cmd *cobra.Command, namespaceId string) {
-	address, port := common.GetServerAddress(cmd)
-	prefix := fmt.Sprintf(constant.Prefix, address, port)
+	address := common.GetServerAddress(cmd)
+	prefix := fmt.Sprintf(constant.Prefix, address)
 	resp := http.Get(prefix + constant.NamespaceUrl + "?show=all&namespaceId=" + namespaceId)
 
 	table := printer.NewTable(100)
