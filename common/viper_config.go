@@ -2,12 +2,11 @@ package common
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"nacosctl/common/constant"
-	"nacosctl/common/loader"
 )
 
 func GetServerAddress(cmd *cobra.Command) (address string) {
-	viper := loader.GetViper()
 	viperAddress := viper.Get("nacosctl.server.address").(string)
 
 	// 如果命令指定了flag  就替换配置文件
