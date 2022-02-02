@@ -12,12 +12,16 @@ func GetNamespaceUrl(cmd *cobra.Command) string {
 	return getServerAddressByViper(cmd) + constant.NamespaceUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetConfig(cmd *cobra.Command) string {
+func GetConfigUrl(cmd *cobra.Command) string {
 	return getServerAddressByViper(cmd) + constant.ConfigUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetConfigVersion(cmd *cobra.Command) string {
+func GetConfigVersionUrl(cmd *cobra.Command) string {
 	return getServerAddressByViper(cmd) + constant.VersionUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
+}
+
+func GetUserUrl(cmd *cobra.Command) string {
+	return getServerAddressByViper(cmd) + constant.UserUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
 func GetLoginUrl(cmd *cobra.Command) string {

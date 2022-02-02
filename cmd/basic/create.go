@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"nacosctl/cmd/basic/config"
 	"nacosctl/cmd/basic/namespace"
+	"nacosctl/cmd/basic/user"
 )
 
 var CreateCmd = &cobra.Command{
@@ -16,4 +17,5 @@ var CreateCmd = &cobra.Command{
 func init() {
 	CreateCmd.AddCommand(namespace.CreateNamespaceCmd)
 	CreateCmd.AddCommand(config.CreateConfigCmd)
+	CreateCmd.AddCommand(user.CreateUserCmd)
 }

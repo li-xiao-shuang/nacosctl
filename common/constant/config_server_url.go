@@ -16,4 +16,7 @@ const (
 
 	// LoginUrl 登录url
 	LoginUrl = base + "/auth/login"
+
+	// UserUrl 用户url
+	UserUrl = base + "/auth/users"
 )
