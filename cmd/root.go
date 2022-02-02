@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"nacosctl/cmd/basic"
+	"nacosctl/cmd/info"
 	"nacosctl/cmd/login"
 	"nacosctl/common/constant"
 )
@@ -29,5 +30,8 @@ func init() {
 
 	//login
 	rootCmd.AddCommand(login.NLoginCmd)
+
+	//local
+	rootCmd.AddCommand(info.InfoCmd)
 
 }
