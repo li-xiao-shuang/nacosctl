@@ -3,4 +3,4 @@ nacosctl:
   password: nacos
   server:
     address: 127.0.0.1:8848
-  user: nacos
+  username: nacos

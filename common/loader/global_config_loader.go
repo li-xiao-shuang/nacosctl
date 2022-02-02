@@ -14,7 +14,7 @@ func ConfigInit() error {
 	viper.AddConfigPath(".")        // 还可以在工作目录中查找配置
 
 	viper.SetDefault("nacosctl.server.address", constant.DefaultAddress)
-	viper.SetDefault("nacosctl.user", "")
+	viper.SetDefault("nacosctl.username", "")
 	viper.SetDefault("nacosctl.password", "")
 
 	err := viper.ReadInConfig() // 查找并读取配置文件

@@ -24,7 +24,7 @@ func ParseLoginCmd(cmd *cobra.Command, username string, password string) {
 	if err != nil {
 		printer.Yellow(err)
 	}
-	viper.Set("nacosctl.user", username)
+	viper.Set("nacosctl.username", username)
 	viper.Set("nacosctl.password", password)
 	viper.Set("nacosctl.accessToken", login.AccessToken)
 	viper.WriteConfigAs("nacosctl.yaml")
