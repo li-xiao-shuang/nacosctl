@@ -3,20 +3,21 @@ package http
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"nacosctl/common"
 	"nacosctl/common/constant"
 )
 
 func GetNamespaceUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.NamespaceUrl
+	return getServerAddressByViper(cmd) + constant.NamespaceUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
 func GetConfig(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.ConfigUrl
+	return getServerAddressByViper(cmd) + constant.ConfigUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
 func GetConfigVersion(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.VersionUrl
+	return getServerAddressByViper(cmd) + constant.VersionUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
 func GetLoginUrl(cmd *cobra.Command) string {

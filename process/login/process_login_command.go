@@ -1,10 +1,12 @@
 package login
 
 import (
+	"encoding/json"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"nacosctl/common/http"
 	"nacosctl/printer"
+	"nacosctl/process/model"
 	"net/url"
 )
 
@@ -17,8 +19,14 @@ func ParseLoginCmd(cmd *cobra.Command, username string, password string) {
 		printer.Red("wrong user name or password")
 		return
 	}
+	login := &model.LoginInfo{}
+	err := json.Unmarshal([]byte(resp), login)
+	if err != nil {
+		printer.Yellow(err)
+	}
 	viper.Set("nacosctl.user", username)
 	viper.Set("nacosctl.password", password)
+	viper.Set("nacosctl.accessToken", login.AccessToken)
 	viper.WriteConfigAs("nacosctl.yaml")
 	printer.Cyan("login successful")
 }
