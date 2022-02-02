@@ -29,6 +29,6 @@ var GetConfigListCmd = &cobra.Command{
 }
 
 func init() {
-	GetConfigListCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	GetConfigListCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "n", "", "namespace id")
 	GetConfigListCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 }

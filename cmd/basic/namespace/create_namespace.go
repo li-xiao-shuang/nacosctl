@@ -32,5 +32,5 @@ var CreateNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	CreateNamespaceCmd.Flags().StringVarP(&defaultNamespaceId, "namespaceId", "i", "", "namespace id")
+	CreateNamespaceCmd.Flags().StringVarP(&defaultNamespaceId, "namespaceId", "n", "", "namespace id")
 }

@@ -39,7 +39,7 @@ var CreateConfigCmd = &cobra.Command{
 }
 
 func init() {
-	CreateConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	CreateConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "n", "", "namespace id")
 	CreateConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 	CreateConfigCmd.Flags().StringVarP(&configType, "type", "t", constant.DefaultType, "config type")
 

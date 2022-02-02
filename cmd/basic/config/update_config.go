@@ -31,7 +31,7 @@ var UpdateConfigCmd = &cobra.Command{
 }
 
 func init() {
-	UpdateConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	UpdateConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "n", "", "namespace id")
 	UpdateConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 	UpdateConfigCmd.Flags().StringVarP(&configType, "type", "t", constant.DefaultType, "config type")
 

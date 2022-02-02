@@ -1,5 +1,5 @@
 nacosctl:
-  password: "123456"
+  password: nacos
   server:
     address: 127.0.0.1:8848
-  user: lixiaoshuang
+  user: nacos

@@ -30,7 +30,7 @@ var GetConfigCmd = &cobra.Command{
 }
 
 func init() {
-	GetConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	GetConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "n", "", "namespace id")
 	GetConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 	GetConfigCmd.Flags().StringVarP(&versionId, "version", "v", "", "To get the previous version "+
 		"of the configuration, you need to specify the configuration id")

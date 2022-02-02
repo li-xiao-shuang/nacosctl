@@ -24,6 +24,6 @@ var DeleteConfigCmd = &cobra.Command{
 }
 
 func init() {
-	DeleteConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "i", "", "namespace id")
+	DeleteConfigCmd.Flags().StringVarP(&configNamespaceId, "namespaceId", "n", "", "namespace id")
 	DeleteConfigCmd.Flags().StringVarP(&group, "group", "g", constant.DefaultGroup, "config group")
 }
