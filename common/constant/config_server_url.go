@@ -3,14 +3,17 @@ package constant
 const (
 	Prefix = "http://%s"
 
-	base = "/nacos"
+	base = "/nacos/v1"
 
 	// ConfigUrl 配置url
-	ConfigUrl = base + "/v1/cs/configs"
+	ConfigUrl = base + "/cs/configs"
 
 	// VersionUrl 配置版本url
-	VersionUrl = base + "/v1/cs/history/previous"
+	VersionUrl = base + "/cs/history/previous"
 
 	// NamespaceUrl 命名空间url
-	NamespaceUrl = base + "/v1/console/namespaces"
+	NamespaceUrl = base + "/console/namespaces"
+
+	// LoginUrl 登录url
+	LoginUrl = base + "/auth/login"
 )
