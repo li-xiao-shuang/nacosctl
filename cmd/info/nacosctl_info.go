@@ -14,4 +14,5 @@ func init() {
 	InfoCmd.AddCommand(UserNameCmd)
 	InfoCmd.AddCommand(PasswordCmd)
 	InfoCmd.AddCommand(ServerAddressCmd)
+	InfoCmd.AddCommand(AccessTokenCmd)
 }
