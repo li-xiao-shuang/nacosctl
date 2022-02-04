@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"nacosctl/cmd/basic/config"
 	"nacosctl/cmd/basic/namespace"
+	"nacosctl/cmd/basic/user"
 )
 
 var DeleteCmd = &cobra.Command{
@@ -16,4 +17,5 @@ var DeleteCmd = &cobra.Command{
 func init() {
 	DeleteCmd.AddCommand(namespace.DeleteNamespaceCmd)
 	DeleteCmd.AddCommand(config.DeleteConfigCmd)
+	DeleteCmd.AddCommand(user.DeleteUserCmd)
 }

@@ -18,3 +18,13 @@ func ParseCreateUserCmd(cmd *cobra.Command, username string, password string) {
 	}
 	printer.Red("fail")
 }
+
+func ParseDeleteUserCmd(cmd *cobra.Command, username string) {
+	userUrl := http.GetUserUrl(cmd)
+	resp := http.Delete(userUrl + "&username=" + username)
+	if resp != "" {
+		printer.Cyan("done")
+		return
+	}
+	printer.Red("fail")
+}
