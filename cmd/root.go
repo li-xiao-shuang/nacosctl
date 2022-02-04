@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"nacosctl/cmd/basic"
 	"nacosctl/cmd/info"
 	"nacosctl/cmd/login"
@@ -21,6 +22,7 @@ func Execute() error {
 func init() {
 	// global flags
 	rootCmd.PersistentFlags().StringP("address", "a", constant.DefaultAddress, "nacos server ip+port")
+	viper.BindPFlag("nacosctl.server.address", rootCmd.Flag("address"))
 
 	// base command
 	rootCmd.AddCommand(basic.CreateCmd)
