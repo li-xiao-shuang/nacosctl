@@ -1,5 +1,5 @@
 nacosctl:
-  accesstoken: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTY0Mzk3MDAxNn0.iuxLuEstz51aoS5iW_7VO9M3BT1DZnf-eF7Krgl06UQ
+  accesstoken: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTY0Mzk3Njk2N30.rjtc2zlsFIh0Km2FP8IOA6J-rGKiBj_5yRhuN82DT_Q
   password: nacos
   server:
     address: 127.0.0.1:8848

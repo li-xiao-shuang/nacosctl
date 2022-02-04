@@ -19,6 +19,7 @@ func ParseCreateUserCmd(cmd *cobra.Command, username string, password string) {
 	printer.Red("fail")
 }
 
+// ParseDeleteUserCmd 解析删除用户命令
 func ParseDeleteUserCmd(cmd *cobra.Command, username string) {
 	userUrl := http.GetUserUrl(cmd)
 	resp := http.Delete(userUrl + "&username=" + username)
@@ -27,4 +28,10 @@ func ParseDeleteUserCmd(cmd *cobra.Command, username string) {
 		return
 	}
 	printer.Red("fail")
+}
+
+// ParseUpdateUserCmd 解析更新用户密码命令
+func ParseUpdateUserCmd(cmd *cobra.Command, user string, newpassword string) {
+	// todo 后续完成
+
 }

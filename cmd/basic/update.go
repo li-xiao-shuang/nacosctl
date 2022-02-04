@@ -16,4 +16,5 @@ var UpdateCmd = &cobra.Command{
 func init() {
 	UpdateCmd.AddCommand(namespace.UpdateNamespaceCmd)
 	UpdateCmd.AddCommand(config.UpdateConfigCmd)
+	//UpdateCmd.AddCommand(user.UpdateUserCmd)
 }
