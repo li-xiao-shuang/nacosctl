@@ -24,7 +24,7 @@ var GetConfigListCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl get configs -h")
 			return
 		}
-		config.ParseGetConfigListCmd(cmd, args[0], args[1], configNamespaceId, group)
+		config.ParseGetConfigListCmd(args[0], args[1], configNamespaceId, group)
 	},
 }
 

@@ -19,7 +19,7 @@ var DeleteConfigCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl delete config -h")
 			return
 		}
-		config.ParseDeleteConfigCmd(cmd, args[0], configNamespaceId, group)
+		config.ParseDeleteConfigCmd(args[0], configNamespaceId, group)
 	},
 }
 

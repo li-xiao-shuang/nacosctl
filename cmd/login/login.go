@@ -23,6 +23,6 @@ var NLoginCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl login  -h")
 			return
 		}
-		login.ParseLoginCmd(cmd, args[0], args[1])
+		login.ParseLoginCmd(args[0], args[1])
 	},
 }

@@ -19,6 +19,6 @@ var GetNamespaceCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl get namespace -h")
 			return
 		}
-		namespace.ParseGetNamespaceCmd(cmd, namespaceId)
+		namespace.ParseGetNamespaceCmd(namespaceId)
 	},
 }

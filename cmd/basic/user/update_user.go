@@ -23,6 +23,6 @@ var UpdateUserCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl update user -h")
 			return
 		}
-		user.ParseUpdateUserCmd(cmd, args[0], args[1])
+		user.ParseUpdateUserCmd(args[0], args[1])
 	},
 }

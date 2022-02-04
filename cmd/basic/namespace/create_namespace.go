@@ -27,7 +27,7 @@ var CreateNamespaceCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl create namespace -h")
 			return
 		}
-		namespace.ParseCreateNamespaceCmd(cmd, namespaceName, namespaceDesc, defaultNamespaceId)
+		namespace.ParseCreateNamespaceCmd(namespaceName, namespaceDesc, defaultNamespaceId)
 	},
 }
 

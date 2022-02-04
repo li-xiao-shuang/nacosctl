@@ -18,6 +18,6 @@ var DeleteUserCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl delete user -h")
 			return
 		}
-		user.ParseDeleteUserCmd(cmd, args[0])
+		user.ParseDeleteUserCmd(args[0])
 	},
 }

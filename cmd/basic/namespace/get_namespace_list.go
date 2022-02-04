@@ -12,6 +12,6 @@ var GetNamespaceListCmd = &cobra.Command{
 	Example: "nacosctl get namespaces",
 	Args:    cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		namespace.ParseGetNamespaceListCmd(cmd)
+		namespace.ParseGetNamespaceListCmd()
 	},
 }

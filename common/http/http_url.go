@@ -2,34 +2,33 @@ package http
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"nacosctl/common"
 	"nacosctl/common/constant"
 )
 
-func GetNamespaceUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.NamespaceUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
+func GetNamespaceUrl() string {
+	return getServerAddressByViper() + constant.NamespaceUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetConfigUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.ConfigUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
+func GetConfigUrl() string {
+	return getServerAddressByViper() + constant.ConfigUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetConfigVersionUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.VersionUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
+func GetConfigVersionUrl() string {
+	return getServerAddressByViper() + constant.VersionUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetUserUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.UserUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
+func GetUserUrl() string {
+	return getServerAddressByViper() + constant.UserUrl + "?accessToken=" + viper.GetString("nacosctl.accessToken")
 }
 
-func GetLoginUrl(cmd *cobra.Command) string {
-	return getServerAddressByViper(cmd) + constant.LoginUrl
+func GetLoginUrl() string {
+	return getServerAddressByViper() + constant.LoginUrl
 }
 
-func getServerAddressByViper(cmd *cobra.Command) string {
-	address := common.GetServerAddress(cmd)
+func getServerAddressByViper() string {
+	address := common.GetServerAddress()
 	prefix := fmt.Sprintf(constant.Prefix, address)
 	return prefix
 }

@@ -34,7 +34,7 @@ var CreateConfigCmd = &cobra.Command{
 		}
 		dataId = args[0]
 		content = args[1]
-		config.ParseCreateConfigCmd(cmd, configNamespaceId, dataId, group, content, configType)
+		config.ParseCreateConfigCmd(configNamespaceId, dataId, group, content, configType)
 	},
 }
 

@@ -23,6 +23,6 @@ var CreateUserCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl create user -h")
 			return
 		}
-		user.ParseCreateUserCmd(cmd, args[0], args[1])
+		user.ParseCreateUserCmd(args[0], args[1])
 	},
 }

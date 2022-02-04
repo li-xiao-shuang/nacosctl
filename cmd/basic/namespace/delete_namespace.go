@@ -19,6 +19,6 @@ var DeleteNamespaceCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl delete namespace -h")
 			return
 		}
-		namespace.ParseDeleteNamespaceCmd(cmd, namespaceId)
+		namespace.ParseDeleteNamespaceCmd(namespaceId)
 	},
 }

@@ -31,6 +31,6 @@ var UpdateNamespaceCmd = &cobra.Command{
 			printer.Yellow("[see]:nacosctl update namespace -h")
 			return
 		}
-		namespace.ParseUpdateNamespaceCmd(cmd, namespaceName, namespaceDesc, namespaceId)
+		namespace.ParseUpdateNamespaceCmd(namespaceName, namespaceDesc, namespaceId)
 	},
 }

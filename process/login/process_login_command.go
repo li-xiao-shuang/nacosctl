@@ -2,7 +2,6 @@ package login
 
 import (
 	"encoding/json"
-	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"nacosctl/common/http"
 	"nacosctl/printer"
@@ -11,8 +10,8 @@ import (
 )
 
 // ParseLoginCmd 解析login命令
-func ParseLoginCmd(cmd *cobra.Command, username string, password string) {
-	loginUrl := http.GetLoginUrl(cmd)
+func ParseLoginCmd(username string, password string) {
+	loginUrl := http.GetLoginUrl()
 	payload := url.Values{"username": {username}, "password": {password}}
 	resp := http.Post(loginUrl, payload)
 	if resp == "" {

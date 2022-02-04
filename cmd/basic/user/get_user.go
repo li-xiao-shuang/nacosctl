@@ -12,6 +12,6 @@ var GetUserCmd = &cobra.Command{
 	Example: "nacosctl get users",
 	Args:    cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		user.ParseGetUsersCmd(cmd)
+		user.ParseGetUsersCmd()
 	},
 }
